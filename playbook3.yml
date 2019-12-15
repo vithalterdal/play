@@ -1,0 +1,25 @@
+---
+ - hosts: all
+   gather_facts: true
+   become_user: true
+   connectivity: ssh
+   tasks:
+     - name: installing git
+       apt: name='{{item}}' state=present
+       with_items: 
+          - git
+       delegate_to: host1
+
+     - name: installing maven and java
+       apt: name='{{item}}' state=present path=/opt
+       with_items:
+          - git
+          - open-jdk-8-jdk
+       delegate_to: host2
+
+     - name: installing docker
+       apt: name='{{item}}' state=present
+       with_items: 
+          - docker.io
+       delegate_to: host3
+

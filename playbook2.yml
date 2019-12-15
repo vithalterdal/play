@@ -1,0 +1,25 @@
+---
+ - hosts: all
+   gather_facts: true
+   conectivity: ssh
+   become_user: true
+   tasks:
+     - name: installing in server1
+       apt: name=git state=present
+       tags: 
+         - host1
+       delegate_to: host1
+
+     - name: installing maven 
+       apt: name=maven state=present path=/opt
+     - name: installing java
+       apt: name=openjdk-8-jdk state=present path=/opt
+       tags: 
+         - host2
+       delegate_to: host2      
+
+     - name: installing docker
+       apt: name=docker.io state=present
+       tags: 
+         - host3
+       delegate_to: host3

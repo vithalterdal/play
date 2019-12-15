@@ -1,0 +1,20 @@
+---
+ - hosts: all
+   gather_facts: true
+   conectivity: ssh
+   become_user: true
+   vars_files: 
+     - sub1.yml
+
+   tasks:
+     - name: i am installing git in server1
+       apt: name='{{pakg1}}' state=present
+       delegate_to: host1
+
+     - name: i am installing maven server2
+       apt: name='{{pakg2}}' state-present path=/opt
+       delegate_to: host2
+
+     - name: i am installing git in server3
+       apt: name='{{pakg3}}' state=present
+       delegate_to: host3

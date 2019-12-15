@@ -1,0 +1,3 @@
+pakg1: git
+pakg2: {maven,openjdk-8-jdk}
+pack3: docker.io
